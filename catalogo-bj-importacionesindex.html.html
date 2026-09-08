@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BJ Importaciones — Catálogo</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Work+Sans:wght@400;500;600;700&display=swap');
+
+:root{
+  --paper:#ECEBE6;
+  --panel:#FFFFFF;
+  --ink:#1B1B18;
+  --ink-soft:#5B5A54;
+  --yellow:#F5B700;
+  --yellow-deep:#C99000;
+  --steel:#2F4858;
+  --steel-soft:#5C7A8C;
+  --rust:#C1440E;
+  --line:#D8D6CE;
+  --radius:4px;
+}
+
+*{ box-sizing:border-box; }
+html,body{ margin:0; padding:0; }
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Work Sans', sans-serif;
+  line-height:1.45;
+}
+h1,h2,h3{ font-family:'Archivo Black', sans-serif; margin:0; }
+
+/* ---------- Top bar ---------- */
+.topbar{
+  position:sticky; top:0; z-index:40;
+  background:var(--ink);
+  color:#fff;
+  padding:14px 20px;
+  display:flex; align-items:center; justify-content:space-between;
+  border-bottom:4px solid var(--yellow);
+}
+.brand{
+  display:flex; align-items:center; gap:10px;
+}
+.brand-mark{
+  width:34px; height:34px; background:var(--yellow);
+  display:flex; align-items:center; justify-content:center;
+  border-radius:var(--radius);
+  font-family:'Archivo Black', sans-serif;
+  color:var(--ink); font-size:16px;
+}
+.brand-name{
+  font-family:'Archivo Black', sans-serif;
+  font-size:16px; letter-spacing:0.02em;
+}
+.brand-sub{
+  font-size:11px; color:#C9C7BE; margin-top:1px;
+}
+.cart-btn{
+  position:relative;
+  background:transparent; border:2px solid var(--yellow);
+  color:#fff; padding:9px 16px; border-radius:var(--radius);
+  font-family:'Work Sans', sans-serif; font-weight:600; font-size:14px;
+  cursor:pointer; display:flex; align-items:center; gap:8px;
+}
+.cart-btn:hover{ background:rgba(245,183,0,0.12); }
+.cart-count{
+  background:var(--rust); color:#fff;
+  border-radius:50%; min-width:20px; height:20px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:11px; font-weight:700; padding:0 4px;
+}
+
+/* ---------- Header band ---------- */
+.headband{
+  background:var(--steel); color:#fff;
+  padding:26px 20px 24px;
+}
+.headband-inner{ max-width:1080px; margin:0 auto; }
+.headband h1{ font-size:26px; line-height:1.15; color:#fff; }
+.headband p{
+  color:#D7E1E6; max-width:520px; margin-top:8px; font-size:14.5px;
+}
+
+/* ---------- Controls ---------- */
+.controls{
+  max-width:1080px; margin:0 auto;
+  padding:18px 20px 4px;
+}
+.search-row{
+  display:flex; gap:10px; margin-bottom:14px;
+}
+.search-row input{
+  flex:1; padding:10px 14px; border:1px solid var(--line);
+  border-radius:var(--radius); font-family:'Work Sans', sans-serif;
+  font-size:14px; background:var(--panel);
+}
+.search-row input:focus{ outline:2px solid var(--steel-soft); outline-offset:1px; }
+.chips{
+  display:flex; flex-wrap:wrap; gap:8px; margin-bottom:6px;
+}
+.chip{
+  padding:7px 14px; border:1px solid var(--line); border-radius:999px;
+  background:var(--panel); font-size:13px; font-weight:600;
+  cursor:pointer; color:var(--ink-soft);
+}
+.chip.active{
+  background:var(--ink); color:var(--yellow); border-color:var(--ink);
+}
+
+/* ---------- Grid ---------- */
+.grid{
+  max-width:1080px; margin:0 auto;
+  padding:10px 20px 60px;
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(230px,1fr));
+  gap:18px;
+}
+.card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  display:flex; flex-direction:column;
+  overflow:hidden;
+}
+.card-art{
+  aspect-ratio:4/3;
+  background:linear-gradient(135deg, #F7DA8A 0%, var(--yellow) 100%);
+  display:flex; align-items:center; justify-content:center;
+  position:relative;
+}
+.card-art svg{ width:52%; height:52%; }
+.card-tag{
+  position:absolute; top:8px; left:8px;
+  background:var(--steel); color:#fff;
+  font-size:10.5px; font-weight:700; letter-spacing:0.02em;
+  padding:3px 8px; border-radius:3px;
+}
+.card-body{ padding:14px 14px 16px; display:flex; flex-direction:column; gap:6px; flex:1; }
+.card-body h3{ font-size:14.5px; line-height:1.25; }
+.card-spec{ font-size:12.5px; color:var(--ink-soft); flex:1; }
+.card-price{
+  font-family:'Archivo Black', sans-serif;
+  font-size:19px; color:var(--ink); margin-top:2px;
+}
+.card-actions{
+  display:flex; align-items:center; gap:8px; margin-top:6px;
+}
+.stepper{
+  display:flex; align-items:center; border:1px solid var(--line);
+  border-radius:var(--radius); overflow:hidden;
+}
+.stepper button{
+  width:28px; height:32px; border:none; background:var(--panel);
+  font-size:16px; cursor:pointer; color:var(--ink);
+}
+.stepper button:hover{ background:var(--paper); }
+.stepper span{ width:28px; text-align:center; font-size:13.5px; font-weight:600; }
+.add-btn{
+  flex:1; background:var(--ink); color:var(--yellow);
+  border:none; padding:9px 10px; border-radius:var(--radius);
+  font-weight:700; font-size:13px; cursor:pointer;
+}
+.add-btn:hover{ background:#000; }
+.add-btn.added{ background:var(--rust); color:#fff; }
+
+.empty-state{
+  max-width:1080px; margin:0 auto; padding:60px 20px; text-align:center;
+  color:var(--ink-soft);
+}
+
+/* ---------- Cart panel ---------- */
+.overlay{
+  position:fixed; inset:0; background:rgba(20,20,18,0.45);
+  opacity:0; pointer-events:none; transition:opacity .2s ease;
+  z-index:50;
+}
+.overlay.open{ opacity:1; pointer-events:auto; }
+
+.cart-panel{
+  position:fixed; top:0; right:0; height:100%;
+  width:380px; max-width:92vw;
+  background:var(--panel);
+  z-index:60;
+  transform:translateX(100%);
+  transition:transform .25s ease;
+  display:flex; flex-direction:column;
+  box-shadow:-6px 0 24px rgba(0,0,0,0.15);
+}
+.cart-panel.open{ transform:translateX(0); }
+.cart-head{
+  padding:18px 18px 14px; border-bottom:1px solid var(--line);
+  display:flex; align-items:center; justify-content:space-between;
+}
+.cart-head h2{ font-size:17px; }
+.close-btn{
+  background:none; border:none; font-size:22px; cursor:pointer; color:var(--ink-soft);
+  line-height:1;
+}
+.cart-items{ flex:1; overflow-y:auto; padding:10px 18px; }
+.cart-item{
+  display:flex; gap:10px; padding:12px 0; border-bottom:1px solid var(--line);
+}
+.cart-item-art{
+  width:48px; height:48px; border-radius:var(--radius);
+  background:linear-gradient(135deg, #F7DA8A 0%, var(--yellow) 100%);
+  flex-shrink:0; display:flex; align-items:center; justify-content:center;
+}
+.cart-item-art svg{ width:60%; height:60%; }
+.cart-item-info{ flex:1; min-width:0; }
+.cart-item-info h4{ font-size:13.5px; font-weight:600; margin:0 0 2px; }
+.cart-item-price{ font-size:12.5px; color:var(--ink-soft); }
+.cart-item-controls{
+  display:flex; align-items:center; justify-content:space-between; margin-top:6px;
+}
+.remove-link{
+  background:none; border:none; color:var(--rust); font-size:12px;
+  cursor:pointer; text-decoration:underline; padding:0;
+}
+.cart-empty{ padding:40px 10px; text-align:center; color:var(--ink-soft); font-size:14px; }
+
+.cart-foot{
+  border-top:1px solid var(--line); padding:16px 18px 20px;
+}
+.cart-total-row{
+  display:flex; justify-content:space-between; align-items:baseline;
+  margin-bottom:14px;
+}
+.cart-total-row span:first-child{ font-size:13.5px; color:var(--ink-soft); }
+.cart-total-row span:last-child{ font-family:'Archivo Black', sans-serif; font-size:22px; }
+.wa-btn{
+  width:100%; background:#25D366; color:#fff; border:none;
+  padding:13px; border-radius:var(--radius); font-weight:700; font-size:14.5px;
+  cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px;
+}
+.wa-btn:hover{ background:#1EBE59; }
+.wa-btn:disabled{ background:#B9B7AE; cursor:not-allowed; }
+.cart-note{ font-size:11.5px; color:var(--ink-soft); margin-top:10px; text-align:center; }
+
+footer{
+  text-align:center; padding:26px 20px 40px; color:var(--ink-soft); font-size:12.5px;
+}
+
+@media (max-width:520px){
+  .headband h1{ font-size:22px; }
+  .grid{ grid-template-columns:repeat(auto-fill, minmax(150px,1fr)); gap:12px; }
+  .card-price{ font-size:16px; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">
+    <div class="brand-mark">BJ</div>
+    <div>
+      <div class="brand-name">BJ IMPORTACIONES</div>
+      <div class="brand-sub">Herramientas Total — Tucumán</div>
+    </div>
+  </div>
+  <button class="cart-btn" id="cartBtn">
+    Carrito <span class="cart-count" id="cartCount">0</span>
+  </button>
+</div>
+
+<div class="headband">
+  <div class="headband-inner">
+    <h1>Herramientas Total, directo de importación.</h1>
+    <p>Armá tu pedido acá y lo cerramos por WhatsApp. Stock limitado por producto.</p>
+  </div>
+</div>
+
+<div class="controls">
+  <div class="search-row">
+    <input type="text" id="searchInput" placeholder="Buscar producto...">
+  </div>
+  <div class="chips" id="chips"></div>
+</div>
+
+<div class="grid" id="grid"></div>
+<div class="empty-state" id="emptyState" style="display:none;">No encontramos productos con ese filtro.</div>
+
+<footer>BJ Importaciones · Juan Luis Nougués 1057, Tucumán · Consultas por WhatsApp</footer>
+
+<div class="overlay" id="overlay"></div>
+<div class="cart-panel" id="cartPanel">
+  <div class="cart-head">
+    <h2>Tu pedido</h2>
+    <button class="close-btn" id="closeCart">&times;</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-foot">
+    <div class="cart-total-row">
+      <span>Total</span>
+      <span id="cartTotal">$0</span>
+    </div>
+    <button class="wa-btn" id="waBtn">Pedir por WhatsApp</button>
+    <div class="cart-note">Te vamos a confirmar stock y forma de entrega por WhatsApp.</div>
+  </div>
+</div>
+
+<script>
+// ======= CONFIGURAR ANTES DE PUBLICAR =======
+// Reemplazar por el número real en formato internacional sin + ni espacios (ej: Argentina Tucumán: 549381XXXXXXX)
+const WHATSAPP_NUMBER = "5493810000000";
+// =============================================
+
+const ICONS = {
+  drill: `<svg viewBox="0 0 64 64" fill="none" stroke="#1B1B18" stroke-width="3"><rect x="8" y="26" width="30" height="14" rx="2"/><path d="M38 30h10l6 5-6 5H38z"/><rect x="16" y="40" width="10" height="12" rx="1"/></svg>`,
+  grinder: `<svg viewBox="0 0 64 64" fill="none" stroke="#1B1B18" stroke-width="3"><circle cx="20" cy="34" r="12"/><rect x="30" y="28" width="24" height="10" rx="2"/><path d="M46 20v8M50 20v8"/></svg>`,
+  saw: `<svg viewBox="0 0 64 64" fill="none" stroke="#1B1B18" stroke-width="3"><path d="M8 44 44 16"/><path d="M40 12l10 4-4 10z"/><path d="M8 44l8 4 4-8z"/></svg>`,
+  spray: `<svg viewBox="0 0 64 64" fill="none" stroke="#1B1B18" stroke-width="3"><rect x="16" y="24" width="14" height="26" rx="2"/><path d="M30 30h14l6-6"/><path d="M46 18h6M46 24h8M46 12h4"/></svg>`,
+  level: `<svg viewBox="0 0 64 64" fill="none" stroke="#1B1B18" stroke-width="3"><rect x="6" y="26" width="52" height="12" rx="2"/><circle cx="32" cy="32" r="4"/></svg>`,
+  caliper: `<svg viewBox="0 0 64 64" fill="none" stroke="#1B1B18" stroke-width="3"><path d="M10 12v40M54 12v20"/><path d="M10 14h44M10 40h30"/><path d="M40 40v12"/></svg>`,
+  tape: `<svg viewBox="0 0 64 64" fill="none" stroke="#1B1B18" stroke-width="3"><circle cx="26" cy="32" r="18"/><circle cx="26" cy="32" r="6"/><path d="M44 32h12v-6"/></svg>`,
+  screwdriver: `<svg viewBox="0 0 64 64" fill="none" stroke="#1B1B18" stroke-width="3"><rect x="8" y="26" width="16" height="12" rx="2"/><path d="M24 30h26M50 26v8"/></svg>`,
+  shears: `<svg viewBox="0 0 64 64" fill="none" stroke="#1B1B18" stroke-width="3"><path d="M14 14l30 30M44 14 14 44"/><circle cx="29" cy="29" r="3"/></svg>`,
+  light: `<svg viewBox="0 0 64 64" fill="none" stroke="#1B1B18" stroke-width="3"><rect x="18" y="16" width="28" height="20" rx="2"/><path d="M24 42h16M28 48h8"/></svg>`,
+  tool: `<svg viewBox="0 0 64 64" fill="none" stroke="#1B1B18" stroke-width="3"><circle cx="24" cy="24" r="10"/><path d="M31 31l18 18"/></svg>`,
+};
+
+const PRODUCTS = [
+  { id:1, name:"Taladro percutor Total", cat:"Eléctricas", price:155000, spec:"850W · mandril 13mm", icon:"drill" },
+  { id:2, name:"Amoladora angular Total 900W", cat:"Eléctricas", price:135000, spec:"Disco 4.5\" · incluye 2 discos", icon:"grinder" },
+  { id:3, name:"Sierra sable Total", cat:"Eléctricas", price:115000, spec:"Corte madera y metal", icon:"saw" },
+  { id:4, name:"Mini taladro Total", cat:"Eléctricas", price:25500, spec:"Trabajos de precisión", icon:"drill" },
+  { id:5, name:"Pistola para pintar Total", cat:"Eléctricas", price:138000, spec:"600W · tanque 800ml", icon:"spray" },
+  { id:6, name:"Nivel láser 2 líneas", cat:"Medición", price:150000, spec:"Alcance 20m · autonivelante", icon:"level" },
+  { id:7, name:"Calibre digital", cat:"Medición", price:58990, spec:"Precisión 0.01mm · LCD", icon:"caliper" },
+  { id:8, name:"Cinta métrica 8m", cat:"Medición", price:21000, spec:"Carcasa reforzada", icon:"tape" },
+  { id:9, name:"Set destornilladores Total", cat:"Manuales", price:45000, spec:"Juego x6 puntas", icon:"screwdriver" },
+  { id:10, name:"Tijera de podar", cat:"Jardín", price:52000, spec:"Filo templado · mango ergonómico", icon:"shears" },
+  { id:11, name:"Reflector LED Total", cat:"Iluminación", price:60000, spec:"Alta potencia · uso exterior", icon:"light" },
+  { id:12, name:"Mini torno Total", cat:"Otros", price:78000, spec:"Multiuso · incluye accesorios", icon:"tool" },
+];
+
+const fmt = (n) => "$" + n.toLocaleString("es-AR");
+
+let cart = {};
+let activeCat = "Todos";
+let searchTerm = "";
+
+const grid = document.getElementById("grid");
+const chipsEl = document.getElementById("chips");
+const emptyState = document.getElementById("emptyState");
+const cartCountEl = document.getElementById("cartCount");
+const cartItemsEl = document.getElementById("cartItems");
+const cartTotalEl = document.getElementById("cartTotal");
+const cartPanel = document.getElementById("cartPanel");
+const overlay = document.getElementById("overlay");
+const waBtn = document.getElementById("waBtn");
+
+function renderChips(){
+  const cats = ["Todos", ...new Set(PRODUCTS.map(p => p.cat))];
+  chipsEl.innerHTML = cats.map(c =>
+    `<button class="chip ${c===activeCat?'active':''}" data-cat="${c}">${c}</button>`
+  ).join("");
+  chipsEl.querySelectorAll(".chip").forEach(btn => {
+    btn.addEventListener("click", () => {
+      activeCat = btn.dataset.cat;
+      renderChips();
+      renderGrid();
+    });
+  });
+}
+
+function renderGrid(){
+  const filtered = PRODUCTS.filter(p => {
+    const matchCat = activeCat === "Todos" || p.cat === activeCat;
+    const matchSearch = p.name.toLowerCase().includes(searchTerm.toLowerCase());
+    return matchCat && matchSearch;
+  });
+
+  emptyState.style.display = filtered.length ? "none" : "block";
+
+  grid.innerHTML = filtered.map(p => {
+    const qty = cart[p.id]?.qty || 0;
+    return `
+    <div class="card">
+      <div class="card-art">
+        <span class="card-tag">${p.cat}</span>
+        ${ICONS[p.icon]}
+      </div>
+      <div class="card-body">
+        <h3>${p.name}</h3>
+        <div class="card-spec">${p.spec}</div>
+        <div class="card-price">${fmt(p.price)}</div>
+        <div class="card-actions">
+          <div class="stepper">
+            <button data-action="dec" data-id="${p.id}">-</button>
+            <span id="qty-${p.id}">${qty}</span>
+            <button data-action="inc" data-id="${p.id}">+</button>
+          </div>
+          <button class="add-btn" data-action="add" data-id="${p.id}">Agregar</button>
+        </div>
+      </div>
+    </div>`;
+  }).join("");
+
+  grid.querySelectorAll("[data-action='inc']").forEach(b => b.addEventListener("click", () => stepQty(b.dataset.id, 1)));
+  grid.querySelectorAll("[data-action='dec']").forEach(b => b.addEventListener("click", () => stepQty(b.dataset.id, -1)));
+  grid.querySelectorAll("[data-action='add']").forEach(b => b.addEventListener("click", () => addToCart(b)));
+}
+
+function stepQty(id, delta){
+  id = Number(id);
+  const el = document.getElementById(`qty-${id}`);
+  let val = Number(el.textContent) + delta;
+  if (val < 0) val = 0;
+  el.textContent = val;
+}
+
+function addToCart(btn){
+  const id = Number(btn.dataset.id);
+  const qtyEl = document.getElementById(`qty-${id}`);
+  const qty = Number(qtyEl.textContent);
+  if (qty <= 0) return;
+  const product = PRODUCTS.find(p => p.id === id);
+  if (!cart[id]) cart[id] = { product, qty: 0 };
+  cart[id].qty += qty;
+  qtyEl.textContent = 0;
+
+  btn.textContent = "Agregado ✓";
+  btn.classList.add("added");
+  setTimeout(() => { btn.textContent = "Agregar"; btn.classList.remove("added"); }, 900);
+
+  renderCart();
+}
+
+function renderCart(){
+  const items = Object.values(cart).filter(i => i.qty > 0);
+  const totalCount = items.reduce((sum, i) => sum + i.qty, 0);
+  const totalPrice = items.reduce((sum, i) => sum + i.qty * i.product.price, 0);
+
+  cartCountEl.textContent = totalCount;
+  cartTotalEl.textContent = fmt(totalPrice);
+  waBtn.disabled = items.length === 0;
+
+  if (items.length === 0){
+    cartItemsEl.innerHTML = `<div class="cart-empty">Todavía no agregaste productos.</div>`;
+    return;
+  }
+
+  cartItemsEl.innerHTML = items.map(i => `
+    <div class="cart-item">
+      <div class="cart-item-art">${ICONS[i.product.icon]}</div>
+      <div class="cart-item-info">
+        <h4>${i.product.name}</h4>
+        <div class="cart-item-price">${fmt(i.product.price)} c/u</div>
+        <div class="cart-item-controls">
+          <div class="stepper">
+            <button data-action="cdec" data-id="${i.product.id}">-</button>
+            <span>${i.qty}</span>
+            <button data-action="cinc" data-id="${i.product.id}">+</button>
+          </div>
+          <button class="remove-link" data-action="remove" data-id="${i.product.id}">Quitar</button>
+        </div>
+      </div>
+    </div>
+  `).join("");
+
+  cartItemsEl.querySelectorAll("[data-action='cinc']").forEach(b => b.addEventListener("click", () => { cart[b.dataset.id].qty += 1; renderCart(); }));
+  cartItemsEl.querySelectorAll("[data-action='cdec']").forEach(b => b.addEventListener("click", () => {
+    cart[b.dataset.id].qty -= 1;
+    if (cart[b.dataset.id].qty <= 0) delete cart[b.dataset.id];
+    renderCart();
+  }));
+  cartItemsEl.querySelectorAll("[data-action='remove']").forEach(b => b.addEventListener("click", () => { delete cart[b.dataset.id]; renderCart(); }));
+}
+
+function openCart(){ cartPanel.classList.add("open"); overlay.classList.add("open"); }
+function closeCart(){ cartPanel.classList.remove("open"); overlay.classList.remove("open"); }
+
+document.getElementById("cartBtn").addEventListener("click", openCart);
+document.getElementById("closeCart").addEventListener("click", closeCart);
+overlay.addEventListener("click", closeCart);
+
+document.getElementById("searchInput").addEventListener("input", (e) => {
+  searchTerm = e.target.value;
+  renderGrid();
+});
+
+waBtn.addEventListener("click", () => {
+  const items = Object.values(cart).filter(i => i.qty > 0);
+  if (items.length === 0) return;
+  let msg = "Hola! Quiero hacer este pedido:%0A%0A";
+  items.forEach(i => {
+    msg += `• ${i.qty}x ${i.product.name} — ${fmt(i.product.price * i.qty)}%0A`;
+  });
+  const total = items.reduce((sum, i) => sum + i.qty * i.product.price, 0);
+  msg += `%0ATotal: ${fmt(total)}`;
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, "_blank");
+});
+
+renderChips();
+renderGrid();
+renderCart();
+</script>
+
+</body>
+</html>
