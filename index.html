@@ -31,7 +31,6 @@ body{
 }
 h1,h2,h3{ font-family:'Archivo Black', sans-serif; margin:0; }
 
-/* ---------- Top bar ---------- */
 .topbar{
   position:sticky; top:0; z-index:40;
   background:var(--ink);
@@ -72,7 +71,6 @@ h1,h2,h3{ font-family:'Archivo Black', sans-serif; margin:0; }
   font-size:11px; font-weight:700; padding:0 4px;
 }
 
-/* ---------- Header band ---------- */
 .headband{
   background:var(--steel); color:#fff;
   padding:26px 20px 24px;
@@ -83,7 +81,6 @@ h1,h2,h3{ font-family:'Archivo Black', sans-serif; margin:0; }
   color:#D7E1E6; max-width:520px; margin-top:8px; font-size:14.5px;
 }
 
-/* ---------- Controls ---------- */
 .controls{
   max-width:1080px; margin:0 auto;
   padding:18px 20px 4px;
@@ -109,7 +106,6 @@ h1,h2,h3{ font-family:'Archivo Black', sans-serif; margin:0; }
   background:var(--ink); color:var(--yellow); border-color:var(--ink);
 }
 
-/* ---------- Grid ---------- */
 .grid{
   max-width:1080px; margin:0 auto;
   padding:10px 20px 60px;
@@ -123,6 +119,11 @@ h1,h2,h3{ font-family:'Archivo Black', sans-serif; margin:0; }
   border-radius:var(--radius);
   display:flex; flex-direction:column;
   overflow:hidden;
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+.card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 20px rgba(27,27,24,0.08);
 }
 .card-art{
   aspect-ratio:4/3;
@@ -130,7 +131,13 @@ h1,h2,h3{ font-family:'Archivo Black', sans-serif; margin:0; }
   display:flex; align-items:center; justify-content:center;
   position:relative;
 }
+.card-art.has-photo{
+  background:#fff;
+}
 .card-art svg{ width:52%; height:52%; }
+.card-art img{
+  width:100%; height:100%; object-fit:contain; padding:14px;
+}
 .card-tag{
   position:absolute; top:8px; left:8px;
   background:var(--steel); color:#fff;
@@ -170,7 +177,6 @@ h1,h2,h3{ font-family:'Archivo Black', sans-serif; margin:0; }
   color:var(--ink-soft);
 }
 
-/* ---------- Cart panel ---------- */
 .overlay{
   position:fixed; inset:0; background:rgba(20,20,18,0.45);
   opacity:0; pointer-events:none; transition:opacity .2s ease;
@@ -208,6 +214,8 @@ h1,h2,h3{ font-family:'Archivo Black', sans-serif; margin:0; }
   flex-shrink:0; display:flex; align-items:center; justify-content:center;
 }
 .cart-item-art svg{ width:60%; height:60%; }
+.cart-item-art.has-photo{ background:#fff; border:1px solid var(--line); }
+.cart-item-art img{ width:100%; height:100%; object-fit:contain; padding:4px; }
 .cart-item-info{ flex:1; min-width:0; }
 .cart-item-info h4{ font-size:13.5px; font-weight:600; margin:0 0 2px; }
 .cart-item-price{ font-size:12.5px; color:var(--ink-soft); }
@@ -301,10 +309,7 @@ footer{
 </div>
 
 <script>
-// ======= CONFIGURAR ANTES DE PUBLICAR =======
-// Reemplazar por el número real en formato internacional sin + ni espacios (ej: Argentina Tucumán: 549381XXXXXXX)
 const WHATSAPP_NUMBER = "5493810000000";
-// =============================================
 
 const ICONS = {
   drill: `<svg viewBox="0 0 64 64" fill="none" stroke="#1B1B18" stroke-width="3"><rect x="8" y="26" width="30" height="14" rx="2"/><path d="M38 30h10l6 5-6 5H38z"/><rect x="16" y="40" width="10" height="12" rx="1"/></svg>`,
@@ -333,6 +338,7 @@ const PRODUCTS = [
   { id:10, name:"Tijera de podar", cat:"Jardín", price:52000, spec:"Filo templado · mango ergonómico", icon:"shears" },
   { id:11, name:"Reflector LED Total", cat:"Iluminación", price:60000, spec:"Alta potencia · uso exterior", icon:"light" },
   { id:12, name:"Mini torno Total", cat:"Otros", price:78000, spec:"Multiuso · incluye accesorios", icon:"tool" },
+  { id:13, name:"Foco LED portátil inalámbrico Total P20S", cat:"Iluminación", price:70000, spec:"1800 lúmenes · exterior · batería y cargador por separado", icon:"light", img:"images/foco-led-portatil-total-p20s.webp" },
 ];
 
 const fmt = (n) => "$" + n.toLocaleString("es-AR");
@@ -378,9 +384,9 @@ function renderGrid(){
     const qty = cart[p.id]?.qty || 0;
     return `
     <div class="card">
-      <div class="card-art">
+      <div class="card-art${p.img ? ' has-photo' : ''}">
         <span class="card-tag">${p.cat}</span>
-        ${ICONS[p.icon]}
+        ${p.img ? `<img src="${p.img}" alt="${p.name}" loading="lazy">` : ICONS[p.icon]}
       </div>
       <div class="card-body">
         <h3>${p.name}</h3>
@@ -444,7 +450,7 @@ function renderCart(){
 
   cartItemsEl.innerHTML = items.map(i => `
     <div class="cart-item">
-      <div class="cart-item-art">${ICONS[i.product.icon]}</div>
+      <div class="cart-item-art${i.product.img ? ' has-photo' : ''}">${i.product.img ? `<img src="${i.product.img}" alt="${i.product.name}">` : ICONS[i.product.icon]}</div>
       <div class="cart-item-info">
         <h4>${i.product.name}</h4>
         <div class="cart-item-price">${fmt(i.product.price)} c/u</div>
