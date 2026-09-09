@@ -145,6 +145,15 @@ h1,h2,h3{ font-family:'Archivo Black', sans-serif; margin:0; }
   font-size:10.5px; font-weight:700;
   padding:3px 8px; border-radius:3px;
 }
+.stock-badge{
+  position:absolute; top:8px; right:8px;
+  background:var(--rust); color:#fff;
+  font-size:10.5px; font-weight:700; letter-spacing:0.02em;
+  padding:3px 8px; border-radius:3px; z-index:2;
+}
+.card-art.out-of-stock img{ filter:grayscale(1); opacity:0.55; }
+.add-btn:disabled{ background:#B9B7AE; color:#fff; cursor:not-allowed; }
+.stepper.disabled button{ opacity:0.35; pointer-events:none; }
 .card-tag{
   position:absolute; top:8px; left:8px;
   background:var(--steel); color:#fff;
@@ -390,6 +399,7 @@ const PRODUCTS = [
   { id:13, name:"Foco LED portátil inalámbrico Total P20S", cat:"Iluminación", price:70000, spec:"1800 lúmenes · exterior · batería y cargador por separado", icon:"light", images:["Reflector%20total%201.webp","reflector%20total%202.webp","reflector%20total%203.webp"] },
   { id:14, name:"Taladro Percutor Atornillador Total 20V Industrial", cat:"Eléctricas", price:160000, spec:"20V · 55Nm · Brushless · mandril 13mm · incluye maletín, 2 baterías y cargador", icon:"drill", images:["taladro_1.webp","taladro_4.webp","taladro_3.webp"] },
   { id:15, name:"Kit Combo Accesorios Total (mod. TOS26068)", cat:"Accesorios", price:140000, spec:"4 cajas · mechas, puntas y sierras · estuche organizador · compatible taladro y atornillador", icon:"tool", images:["como_3.webp","combo_2.webp","combo_1.webp"] },
+  { id:16, name:"Pistola de Pintura Inalámbrica Total 20V (mod. TSGLI20042)", cat:"Eléctricas", price:100000, spec:"20V · flujo 800ml/min · tanque 1000ml · incluye batería, cargador y accesorios", icon:"spray", images:["P1.jpg","P2.jpg"], outOfStock:true },
 ];
 
 const fmt = (n) => "$" + n.toLocaleString("es-AR");
@@ -434,24 +444,26 @@ function renderGrid(){
   grid.innerHTML = filtered.map(p => {
     const qty = cart[p.id]?.qty || 0;
     const hasPhotos = p.images && p.images.length > 0;
+    const oos = !!p.outOfStock;
     return `
     <div class="card">
-      <div class="card-art${hasPhotos ? ' has-photo' : ''}" ${hasPhotos ? `data-action="open-gallery" data-id="${p.id}"` : ''}>
+      <div class="card-art${hasPhotos ? ' has-photo' : ''}${oos ? ' out-of-stock' : ''}" ${hasPhotos ? `data-action="open-gallery" data-id="${p.id}"` : ''}>
         <span class="card-tag">${p.cat}</span>
         ${hasPhotos ? `<img src="${p.images[0]}" alt="${p.name}" loading="lazy">` : ICONS[p.icon]}
         ${hasPhotos && p.images.length > 1 ? `<span class="photo-count">📷 ${p.images.length}</span>` : ''}
+        ${oos ? `<span class="stock-badge">Sin stock</span>` : ''}
       </div>
       <div class="card-body">
         <h3>${p.name}</h3>
         <div class="card-spec">${p.spec}</div>
         <div class="card-price">${fmt(p.price)}</div>
         <div class="card-actions">
-          <div class="stepper">
-            <button data-action="dec" data-id="${p.id}">-</button>
+          <div class="stepper${oos ? ' disabled' : ''}">
+            <button data-action="dec" data-id="${p.id}" ${oos ? 'disabled' : ''}>-</button>
             <span id="qty-${p.id}">${qty}</span>
-            <button data-action="inc" data-id="${p.id}">+</button>
+            <button data-action="inc" data-id="${p.id}" ${oos ? 'disabled' : ''}>+</button>
           </div>
-          <button class="add-btn" data-action="add" data-id="${p.id}">Agregar</button>
+          <button class="add-btn" data-action="add" data-id="${p.id}" ${oos ? 'disabled' : ''}>${oos ? 'Sin stock' : 'Agregar'}</button>
         </div>
       </div>
     </div>`;
