@@ -133,10 +133,17 @@ h1,h2,h3{ font-family:'Archivo Black', sans-serif; margin:0; }
 }
 .card-art.has-photo{
   background:#fff;
+  cursor:zoom-in;
 }
 .card-art svg{ width:52%; height:52%; }
 .card-art img{
   width:100%; height:100%; object-fit:contain; padding:14px;
+}
+.photo-count{
+  position:absolute; bottom:8px; right:8px;
+  background:rgba(27,27,24,0.75); color:#fff;
+  font-size:10.5px; font-weight:700;
+  padding:3px 8px; border-radius:3px;
 }
 .card-tag{
   position:absolute; top:8px; left:8px;
@@ -250,6 +257,36 @@ footer{
   text-align:center; padding:26px 20px 40px; color:var(--ink-soft); font-size:12.5px;
 }
 
+.lightbox{
+  position:fixed; inset:0; background:rgba(20,20,18,0.9);
+  z-index:80; display:flex; align-items:center; justify-content:center;
+  opacity:0; pointer-events:none; transition:opacity .2s ease;
+}
+.lightbox.open{ opacity:1; pointer-events:auto; }
+.lightbox-content{
+  position:relative; max-width:90vw; max-height:85vh;
+  display:flex; flex-direction:column; align-items:center; gap:14px;
+}
+.lightbox-content img{
+  max-width:90vw; max-height:70vh; object-fit:contain;
+  background:#fff; border-radius:var(--radius);
+}
+.lightbox-close{
+  position:absolute; top:-40px; right:-6px;
+  background:none; border:none; color:#fff; font-size:32px;
+  cursor:pointer; line-height:1;
+}
+.lightbox-nav{
+  display:flex; align-items:center; gap:20px;
+}
+.lightbox-nav button{
+  background:var(--yellow); color:var(--ink); border:none;
+  width:38px; height:38px; border-radius:50%;
+  font-size:18px; font-weight:700; cursor:pointer;
+}
+.lightbox-nav button:disabled{ opacity:0.3; cursor:not-allowed; }
+.lightbox-counter{ color:#fff; font-size:13px; font-weight:600; min-width:40px; text-align:center; }
+
 @media (max-width:520px){
   .headband h1{ font-size:22px; }
   .grid{ grid-template-columns:repeat(auto-fill, minmax(150px,1fr)); gap:12px; }
@@ -308,6 +345,18 @@ footer{
   </div>
 </div>
 
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-content">
+    <button class="lightbox-close" id="lightboxClose">&times;</button>
+    <img id="lightboxImg" src="" alt="">
+    <div class="lightbox-nav">
+      <button id="lightboxPrev">&#8249;</button>
+      <span class="lightbox-counter" id="lightboxCounter">1/1</span>
+      <button id="lightboxNext">&#8250;</button>
+    </div>
+  </div>
+</div>
+
 <script>
 const WHATSAPP_NUMBER = "5493810000000";
 
@@ -338,7 +387,7 @@ const PRODUCTS = [
   { id:10, name:"Tijera de podar", cat:"Jardín", price:52000, spec:"Filo templado · mango ergonómico", icon:"shears" },
   { id:11, name:"Reflector LED Total", cat:"Iluminación", price:60000, spec:"Alta potencia · uso exterior", icon:"light" },
   { id:12, name:"Mini torno Total", cat:"Otros", price:78000, spec:"Multiuso · incluye accesorios", icon:"tool" },
-  { id:13, name:"Foco LED portátil inalámbrico Total P20S", cat:"Iluminación", price:70000, spec:"1800 lúmenes · exterior · batería y cargador por separado", icon:"light", img:"Reflector%20total%201.webp" },
+  { id:13, name:"Foco LED portátil inalámbrico Total P20S", cat:"Iluminación", price:70000, spec:"1800 lúmenes · exterior · batería y cargador por separado", icon:"light", images:["Reflector%20total%201.webp","reflector%20total%202.webp","reflector%20total%203.webp"] },
 ];
 
 const fmt = (n) => "$" + n.toLocaleString("es-AR");
@@ -382,11 +431,13 @@ function renderGrid(){
 
   grid.innerHTML = filtered.map(p => {
     const qty = cart[p.id]?.qty || 0;
+    const hasPhotos = p.images && p.images.length > 0;
     return `
     <div class="card">
-      <div class="card-art${p.img ? ' has-photo' : ''}">
+      <div class="card-art${hasPhotos ? ' has-photo' : ''}" ${hasPhotos ? `data-action="open-gallery" data-id="${p.id}"` : ''}>
         <span class="card-tag">${p.cat}</span>
-        ${p.img ? `<img src="${p.img}" alt="${p.name}" loading="lazy">` : ICONS[p.icon]}
+        ${hasPhotos ? `<img src="${p.images[0]}" alt="${p.name}" loading="lazy">` : ICONS[p.icon]}
+        ${hasPhotos && p.images.length > 1 ? `<span class="photo-count">📷 ${p.images.length}</span>` : ''}
       </div>
       <div class="card-body">
         <h3>${p.name}</h3>
@@ -407,6 +458,7 @@ function renderGrid(){
   grid.querySelectorAll("[data-action='inc']").forEach(b => b.addEventListener("click", () => stepQty(b.dataset.id, 1)));
   grid.querySelectorAll("[data-action='dec']").forEach(b => b.addEventListener("click", () => stepQty(b.dataset.id, -1)));
   grid.querySelectorAll("[data-action='add']").forEach(b => b.addEventListener("click", () => addToCart(b)));
+  grid.querySelectorAll("[data-action='open-gallery']").forEach(b => b.addEventListener("click", () => openLightbox(Number(b.dataset.id))));
 }
 
 function stepQty(id, delta){
@@ -450,7 +502,7 @@ function renderCart(){
 
   cartItemsEl.innerHTML = items.map(i => `
     <div class="cart-item">
-      <div class="cart-item-art${i.product.img ? ' has-photo' : ''}">${i.product.img ? `<img src="${i.product.img}" alt="${i.product.name}">` : ICONS[i.product.icon]}</div>
+      <div class="cart-item-art${i.product.images ? ' has-photo' : ''}">${i.product.images ? `<img src="${i.product.images[0]}" alt="${i.product.name}">` : ICONS[i.product.icon]}</div>
       <div class="cart-item-info">
         <h4>${i.product.name}</h4>
         <div class="cart-item-price">${fmt(i.product.price)} c/u</div>
@@ -481,6 +533,37 @@ function closeCart(){ cartPanel.classList.remove("open"); overlay.classList.remo
 document.getElementById("cartBtn").addEventListener("click", openCart);
 document.getElementById("closeCart").addEventListener("click", closeCart);
 overlay.addEventListener("click", closeCart);
+
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightboxImg");
+const lightboxCounter = document.getElementById("lightboxCounter");
+const lightboxPrev = document.getElementById("lightboxPrev");
+const lightboxNext = document.getElementById("lightboxNext");
+let lightboxImages = [];
+let lightboxIndex = 0;
+
+function openLightbox(productId){
+  const product = PRODUCTS.find(p => p.id === productId);
+  if (!product || !product.images) return;
+  lightboxImages = product.images;
+  lightboxIndex = 0;
+  updateLightbox();
+  lightbox.classList.add("open");
+}
+
+function updateLightbox(){
+  lightboxImg.src = lightboxImages[lightboxIndex];
+  lightboxCounter.textContent = `${lightboxIndex + 1}/${lightboxImages.length}`;
+  lightboxPrev.disabled = lightboxIndex === 0;
+  lightboxNext.disabled = lightboxIndex === lightboxImages.length - 1;
+}
+
+function closeLightbox(){ lightbox.classList.remove("open"); }
+
+document.getElementById("lightboxClose").addEventListener("click", closeLightbox);
+lightbox.addEventListener("click", (e) => { if (e.target === lightbox) closeLightbox(); });
+lightboxPrev.addEventListener("click", () => { if (lightboxIndex > 0){ lightboxIndex--; updateLightbox(); } });
+lightboxNext.addEventListener("click", () => { if (lightboxIndex < lightboxImages.length - 1){ lightboxIndex++; updateLightbox(); } });
 
 document.getElementById("searchInput").addEventListener("input", (e) => {
   searchTerm = e.target.value;
