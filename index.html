@@ -310,7 +310,7 @@ footer{
     <div class="brand-mark">BJ</div>
     <div>
       <div class="brand-name">BJ IMPORTACIONES</div>
-      <div class="brand-sub">Venta por mayor y menor · Tucumán, Argentina</div>
+      <div class="brand-sub">Ventas por mayor y por menor · Tucumán, Argentina</div>
     </div>
   </div>
   <button class="cart-btn" id="cartBtn">
@@ -389,7 +389,7 @@ const PRODUCTS = [
   { id:4, name:"Mini taladro Total", cat:"Eléctricas", price:25500, spec:"Trabajos de precisión", icon:"drill", draft:true },
   { id:5, name:"Pistola para pintar Total", cat:"Eléctricas", price:138000, spec:"600W · tanque 800ml", icon:"spray", draft:true },
   { id:6, name:"Nivel Láser 360° Total (mod. TLL306502)", cat:"Medición", price:150000, spec:"Alcance 35m · autonivelante · líneas verdes · control remoto · carga USB-C · con estuche", icon:"level", images:["NIVEL_1.jpg","NIVEL_3.jpg","NIVEL_2.jpg"] },
-  { id:7, name:"Calibre digital", cat:"Medición", price:58990, spec:"Precisión 0.01mm · LCD", icon:"caliper", draft:true },
+  { id:7, name:"Calibre Digital Total (mod. TMT321501)", cat:"Medición", price:50000, spec:"0-150mm · resolución 0.01mm · acero inoxidable · botón de cero · apagado automático · incluye estuche", icon:"caliper", images:["c2.webp","c1.webp","c4.webp"] },
   { id:8, name:"Cinta métrica Total 8m 32mm", cat:"Medición", price:25000, spec:"Acero retráctil · botón de tranca · recubierta nylon 360° · métrica y en pulgadas", icon:"tape", images:["ruleta_6.jpg","ruleta_5.jpg","ruleta_3.webp"] },
   { id:9, name:"Set de Destornilladores Total 26 Piezas", cat:"Manuales", price:55000, spec:"Acero Cr-V · puntas plana, Phillips, Pozidriv, Torx y hexagonal · mangos ergonómicos · con organizador", icon:"screwdriver", images:["SET_1.webp","SET_4.jpg","SET_2.webp"] },
   { id:10, name:"Combo Tijeras de Poda Total 3 Piezas (mod. THT1576033)", cat:"Jardín", price:65000, spec:"Incluye tijera 215mm, cizalla 570mm y tijerón 730mm · acero al carbono SK5 · mango antideslizante", icon:"shears", images:["T1.jpg","T2.jpg"] },
@@ -401,15 +401,17 @@ const PRODUCTS = [
   { id:17, name:"Docena de Guantes", cat:"Accesorios", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool", draft:true },
   { id:18, name:"Kit Cinta + Medidor", cat:"Medición", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tape", draft:true },
   { id:19, name:"Cortador de Vidrio", cat:"Manuales", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool", draft:true },
-  { id:20, name:"Aspiradora 2 en 1", cat:"Hogar", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool", draft:true },
+  { id:20, name:"Aspiradora 2 en 1", cat:"Bazar", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool", draft:true },
   { id:21, name:"Discos para Amoladora", cat:"Accesorios", price:0, spec:"Descripción y foto pendiente de cargar", icon:"grinder", draft:true },
   { id:22, name:"Soporte de Soldador USB", cat:"Accesorios", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool", draft:true },
-  { id:23, name:"Termo de la Selección", cat:"Hogar", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool", draft:true },
-  { id:24, name:"Set de Cubiertos (genérico)", cat:"Hogar", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool", draft:true },
-  { id:25, name:"Set de Cubiertos Tramontina", cat:"Hogar", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool", draft:true },
+  { id:23, name:"Termo de la Selección", cat:"Bazar", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool", draft:true },
+  { id:24, name:"Set de Cubiertos (genérico)", cat:"Bazar", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool", draft:true },
+  { id:25, name:"Set de Cubiertos Tramontina", cat:"Bazar", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool", draft:true },
   { id:26, name:"Cinta Scotch", cat:"Accesorios", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool", draft:true },
-  { id:27, name:"Mueble para Inodoro", cat:"Hogar", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool", draft:true },
-  { id:28, name:"Mueble para Lavarropa/Inodoro", cat:"Hogar", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool", draft:true },
+  { id:27, name:"Mueble para Inodoro", cat:"Bazar", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool", draft:true },
+  { id:28, name:"Mueble para Lavarropa/Inodoro", cat:"Bazar", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool", draft:true },
+  { id:29, name:"Producto de Juguetería (pendiente)", cat:"Juguetería", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool", draft:true },
+  { id:30, name:"Producto de Bicicletas (pendiente)", cat:"Bicicletas", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool", draft:true },
 ];
 
 const fmt = (n) => "$" + n.toLocaleString("es-AR");
