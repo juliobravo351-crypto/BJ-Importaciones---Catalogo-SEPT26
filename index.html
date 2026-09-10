@@ -386,10 +386,10 @@ const ICONS = {
 const PRODUCTS = [
   { id:2, name:"Amoladora Angular Inalámbrica Total 20V (mod. TAGLI261521)", cat:"Eléctricas", price:160000, spec:"900W · Brushless · disco 115mm · 9000rpm · incluye batería 4.0Ah, cargador y 5 discos", icon:"grinder", images:["AMO_2.jpg","AMO_1.jpg","AMO_3.jpg"] },
   { id:3, name:"Sierra Sable Inalámbrica Total (mod. TRSLI6506)", cat:"Eléctricas", price:100000, spec:"0-3200rpm · corte metal 8mm / madera 65mm · traba de gatillo · luz LED · NO incluye batería, cargador ni hojas", icon:"saw", images:["s1.webp"], outOfStock:true },
-  { id:4, name:"Mini taladro Total", cat:"Eléctricas", price:25500, spec:"Trabajos de precisión", icon:"drill" },
-  { id:5, name:"Pistola para pintar Total", cat:"Eléctricas", price:138000, spec:"600W · tanque 800ml", icon:"spray" },
+  { id:4, name:"Mini taladro Total", cat:"Eléctricas", price:25500, spec:"Trabajos de precisión", icon:"drill", draft:true },
+  { id:5, name:"Pistola para pintar Total", cat:"Eléctricas", price:138000, spec:"600W · tanque 800ml", icon:"spray", draft:true },
   { id:6, name:"Nivel Láser 360° Total (mod. TLL306502)", cat:"Medición", price:150000, spec:"Alcance 35m · autonivelante · líneas verdes · control remoto · carga USB-C · con estuche", icon:"level", images:["NIVEL_1.jpg","NIVEL_3.jpg","NIVEL_2.jpg"] },
-  { id:7, name:"Calibre digital", cat:"Medición", price:58990, spec:"Precisión 0.01mm · LCD", icon:"caliper" },
+  { id:7, name:"Calibre digital", cat:"Medición", price:58990, spec:"Precisión 0.01mm · LCD", icon:"caliper", draft:true },
   { id:8, name:"Cinta métrica Total 8m 32mm", cat:"Medición", price:25000, spec:"Acero retráctil · botón de tranca · recubierta nylon 360° · métrica y en pulgadas", icon:"tape", images:["ruleta_6.jpg","ruleta_5.jpg","ruleta_3.webp"] },
   { id:9, name:"Set de Destornilladores Total 26 Piezas", cat:"Manuales", price:55000, spec:"Acero Cr-V · puntas plana, Phillips, Pozidriv, Torx y hexagonal · mangos ergonómicos · con organizador", icon:"screwdriver", images:["SET_1.webp","SET_4.jpg","SET_2.webp"] },
   { id:10, name:"Combo Tijeras de Poda Total 3 Piezas (mod. THT1576033)", cat:"Jardín", price:65000, spec:"Incluye tijera 215mm, cizalla 570mm y tijerón 730mm · acero al carbono SK5 · mango antideslizante", icon:"shears", images:["T1.jpg","T2.jpg"] },
@@ -398,18 +398,18 @@ const PRODUCTS = [
   { id:14, name:"Taladro Percutor Atornillador Total 20V Industrial", cat:"Eléctricas", price:160000, spec:"20V · 55Nm · Brushless · mandril 13mm · incluye maletín, 2 baterías y cargador", icon:"drill", images:["taladro_1.webp","taladro_4.webp","taladro_3.webp"] },
   { id:15, name:"Kit Combo Accesorios Total (mod. TOS26068)", cat:"Accesorios", price:140000, spec:"4 cajas · mechas, puntas y sierras · estuche organizador · compatible taladro y atornillador", icon:"tool", images:["como_3.webp","combo_2.webp","combo_1.webp"] },
   { id:16, name:"Pistola de Pintura Inalámbrica Total 20V (mod. TSGLI20042)", cat:"Eléctricas", price:100000, spec:"20V · flujo 800ml/min · tanque 1000ml · incluye batería, cargador y accesorios", icon:"spray", images:["P1.jpg","P2.jpg"], outOfStock:true },
-  { id:17, name:"Docena de Guantes", cat:"Accesorios", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool" },
-  { id:18, name:"Kit Cinta + Medidor", cat:"Medición", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tape" },
-  { id:19, name:"Cortador de Vidrio", cat:"Manuales", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool" },
-  { id:20, name:"Aspiradora 2 en 1", cat:"Hogar", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool" },
-  { id:21, name:"Discos para Amoladora", cat:"Accesorios", price:0, spec:"Descripción y foto pendiente de cargar", icon:"grinder" },
-  { id:22, name:"Soporte de Soldador USB", cat:"Accesorios", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool" },
-  { id:23, name:"Termo de la Selección", cat:"Hogar", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool" },
-  { id:24, name:"Set de Cubiertos (genérico)", cat:"Hogar", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool" },
-  { id:25, name:"Set de Cubiertos Tramontina", cat:"Hogar", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool" },
-  { id:26, name:"Cinta Scotch", cat:"Accesorios", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool" },
-  { id:27, name:"Mueble para Inodoro", cat:"Hogar", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool" },
-  { id:28, name:"Mueble para Lavarropa/Inodoro", cat:"Hogar", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool" },
+  { id:17, name:"Docena de Guantes", cat:"Accesorios", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool", draft:true },
+  { id:18, name:"Kit Cinta + Medidor", cat:"Medición", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tape", draft:true },
+  { id:19, name:"Cortador de Vidrio", cat:"Manuales", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool", draft:true },
+  { id:20, name:"Aspiradora 2 en 1", cat:"Hogar", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool", draft:true },
+  { id:21, name:"Discos para Amoladora", cat:"Accesorios", price:0, spec:"Descripción y foto pendiente de cargar", icon:"grinder", draft:true },
+  { id:22, name:"Soporte de Soldador USB", cat:"Accesorios", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool", draft:true },
+  { id:23, name:"Termo de la Selección", cat:"Hogar", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool", draft:true },
+  { id:24, name:"Set de Cubiertos (genérico)", cat:"Hogar", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool", draft:true },
+  { id:25, name:"Set de Cubiertos Tramontina", cat:"Hogar", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool", draft:true },
+  { id:26, name:"Cinta Scotch", cat:"Accesorios", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool", draft:true },
+  { id:27, name:"Mueble para Inodoro", cat:"Hogar", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool", draft:true },
+  { id:28, name:"Mueble para Lavarropa/Inodoro", cat:"Hogar", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool", draft:true },
 ];
 
 const fmt = (n) => "$" + n.toLocaleString("es-AR");
@@ -429,7 +429,7 @@ const overlay = document.getElementById("overlay");
 const waBtn = document.getElementById("waBtn");
 
 function renderChips(){
-  const cats = ["Todos", ...new Set(PRODUCTS.map(p => p.cat))];
+  const cats = ["Todos", ...new Set(PRODUCTS.filter(p => !p.draft).map(p => p.cat))];
   chipsEl.innerHTML = cats.map(c =>
     `<button class="chip ${c===activeCat?'active':''}" data-cat="${c}">${c}</button>`
   ).join("");
@@ -444,6 +444,7 @@ function renderChips(){
 
 function renderGrid(){
   const filtered = PRODUCTS.filter(p => {
+    if (p.draft) return false;
     const matchCat = activeCat === "Todos" || p.cat === activeCat;
     const matchSearch = p.name.toLowerCase().includes(searchTerm.toLowerCase());
     return matchCat && matchSearch;
