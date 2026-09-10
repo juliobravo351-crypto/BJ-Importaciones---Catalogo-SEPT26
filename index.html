@@ -398,6 +398,18 @@ const PRODUCTS = [
   { id:14, name:"Taladro Percutor Atornillador Total 20V Industrial", cat:"Eléctricas", price:160000, spec:"20V · 55Nm · Brushless · mandril 13mm · incluye maletín, 2 baterías y cargador", icon:"drill", images:["taladro_1.webp","taladro_4.webp","taladro_3.webp"] },
   { id:15, name:"Kit Combo Accesorios Total (mod. TOS26068)", cat:"Accesorios", price:140000, spec:"4 cajas · mechas, puntas y sierras · estuche organizador · compatible taladro y atornillador", icon:"tool", images:["como_3.webp","combo_2.webp","combo_1.webp"] },
   { id:16, name:"Pistola de Pintura Inalámbrica Total 20V (mod. TSGLI20042)", cat:"Eléctricas", price:100000, spec:"20V · flujo 800ml/min · tanque 1000ml · incluye batería, cargador y accesorios", icon:"spray", images:["P1.jpg","P2.jpg"], outOfStock:true },
+  { id:17, name:"Docena de Guantes", cat:"Accesorios", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool" },
+  { id:18, name:"Kit Cinta + Medidor", cat:"Medición", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tape" },
+  { id:19, name:"Cortador de Vidrio", cat:"Manuales", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool" },
+  { id:20, name:"Aspiradora 2 en 1", cat:"Hogar", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool" },
+  { id:21, name:"Discos para Amoladora", cat:"Accesorios", price:0, spec:"Descripción y foto pendiente de cargar", icon:"grinder" },
+  { id:22, name:"Soporte de Soldador USB", cat:"Accesorios", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool" },
+  { id:23, name:"Termo de la Selección", cat:"Hogar", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool" },
+  { id:24, name:"Set de Cubiertos (genérico)", cat:"Hogar", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool" },
+  { id:25, name:"Set de Cubiertos Tramontina", cat:"Hogar", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool" },
+  { id:26, name:"Cinta Scotch", cat:"Accesorios", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool" },
+  { id:27, name:"Mueble para Inodoro", cat:"Hogar", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool" },
+  { id:28, name:"Mueble para Lavarropa/Inodoro", cat:"Hogar", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool" },
 ];
 
 const fmt = (n) => "$" + n.toLocaleString("es-AR");
@@ -454,7 +466,7 @@ function renderGrid(){
       <div class="card-body">
         <h3>${p.name}</h3>
         <div class="card-spec">${p.spec}</div>
-        <div class="card-price">${fmt(p.price)}</div>
+        <div class="card-price">${p.price ? fmt(p.price) : 'A cotizar'}</div>
         <div class="card-actions">
           <div class="stepper${oos ? ' disabled' : ''}">
             <button data-action="dec" data-id="${p.id}" ${oos ? 'disabled' : ''}>-</button>
@@ -517,7 +529,7 @@ function renderCart(){
       <div class="cart-item-art${i.product.images ? ' has-photo' : ''}">${i.product.images ? `<img src="${i.product.images[0]}" alt="${i.product.name}">` : ICONS[i.product.icon]}</div>
       <div class="cart-item-info">
         <h4>${i.product.name}</h4>
-        <div class="cart-item-price">${fmt(i.product.price)} c/u</div>
+        <div class="cart-item-price">${i.product.price ? fmt(i.product.price) + " c/u" : "A cotizar"}</div>
         <div class="cart-item-controls">
           <div class="stepper">
             <button data-action="cdec" data-id="${i.product.id}">-</button>
