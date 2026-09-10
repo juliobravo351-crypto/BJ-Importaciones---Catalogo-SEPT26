@@ -321,7 +321,7 @@ footer{
 </div>
 
 <div class="grid" id="grid"></div>
-<div class="empty-state" id="emptyState" style="display:none;">No encontramos productos con ese filtro.</div>
+<div class="empty-state" id="emptyState" style="display:none;">Todavía no cargamos productos en esta categoría. ¡Muy pronto vamos a sumar novedades acá!</div>
 
 <footer>BJ Importaciones · Juan Luis Nougués 1057, Tucumán · Consultas por WhatsApp</footer>
 
@@ -420,7 +420,7 @@ const overlay = document.getElementById("overlay");
 const waBtn = document.getElementById("waBtn");
 
 function renderChips(){
-  const cats = ["Todos", ...new Set(PRODUCTS.filter(p => !p.draft).map(p => p.cat))];
+  const cats = ["Todos", ...new Set(PRODUCTS.map(p => p.cat))];
   chipsEl.innerHTML = cats.map(c =>
     `<button class="chip ${c===activeCat?'active':''}" data-cat="${c}">${c}</button>`
   ).join("");
