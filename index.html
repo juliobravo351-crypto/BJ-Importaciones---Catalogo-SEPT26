@@ -41,10 +41,13 @@ h1,h2,h3{ font-family:'Archivo Black', sans-serif; margin:0; }
 }
 .brand{
   display:flex; align-items:center; gap:10px;
+  flex:0 0 40%;
+  max-width:420px;
 }
 .brand-logo{
-  height:52px;
-  width:auto;
+  width:100%;
+  height:auto;
+  max-height:78px;
   display:block;
 }
 .cart-btn{
@@ -288,7 +291,8 @@ footer{
 .lightbox-counter{ color:#fff; font-size:13px; font-weight:600; min-width:40px; text-align:center; }
 
 @media (max-width:520px){
-  .brand-logo{ height:38px; }
+  .brand{ flex-basis:58%; max-width:220px; }
+  .brand-logo{ max-height:42px; }
   .headband h1{ font-size:23px; }
   .grid{ grid-template-columns:repeat(auto-fill, minmax(150px,1fr)); gap:12px; }
   .card-price{ font-size:19px; }
