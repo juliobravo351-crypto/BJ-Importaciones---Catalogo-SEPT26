@@ -40,16 +40,16 @@ h1,h2,h3{ font-family:'Archivo Black', sans-serif; margin:0; }
   border-bottom:4px solid var(--yellow);
 }
 .brand{
-  display:flex; align-items:center; gap:10px;
-  flex:0 0 40%;
-  max-width:420px;
+  display:flex; align-items:center; gap:12px;
 }
-.brand-logo{
-  width:100%;
-  height:auto;
-  max-height:78px;
-  display:block;
+.brand-icon{ height:46px; width:auto; flex-shrink:0; display:block; }
+.brand-text{ display:flex; flex-direction:column; line-height:1.2; }
+.brand-name{
+  font-family:'Archivo Black', sans-serif; font-size:16px;
+  letter-spacing:0.02em; color:#fff;
 }
+.brand-tagline{ font-size:9.5px; color:#C9C7BE; letter-spacing:0.03em; margin-top:3px; }
+.brand-location{ font-size:9.5px; color:#8B98A0; letter-spacing:0.03em; }
 .cart-btn{
   position:relative;
   background:var(--yellow); border:2px solid var(--yellow);
@@ -69,23 +69,27 @@ h1,h2,h3{ font-family:'Archivo Black', sans-serif; margin:0; }
 .headband{
   background:var(--steel); color:#fff;
   padding:38px 20px 34px;
-  overflow:hidden;
 }
-.headband-inner{
-  max-width:1080px; margin:0 auto;
-  display:flex; align-items:center; justify-content:space-between; gap:40px;
-}
-.headband-text{ flex:1; min-width:0; }
+.headband-inner{ max-width:1080px; margin:0 auto; }
 .headband h1{ font-size:31px; line-height:1.15; color:#fff; }
 .headband p{
   color:#D7E1E6; max-width:560px; margin-top:10px; font-size:15.5px;
 }
-.headband-hero{
-  flex-shrink:0; width:220px; height:220px;
-  border:3px solid var(--yellow); border-radius:var(--radius);
-  overflow:hidden; background:#fff;
+
+.trust-strip{
+  background:var(--panel); border-bottom:1px solid var(--line);
 }
-.headband-hero img{ width:100%; height:100%; object-fit:cover; }
+.trust-strip-inner{
+  max-width:1080px; margin:0 auto; padding:16px 20px;
+  display:flex; flex-wrap:wrap; gap:18px 28px;
+}
+.trust-item{
+  display:flex; align-items:center; gap:11px;
+  flex:1; min-width:220px;
+}
+.trust-item svg{ width:26px; height:26px; flex-shrink:0; color:var(--yellow-deep); }
+.trust-item-text strong{ display:block; font-size:13.5px; color:var(--ink); }
+.trust-item-text span{ display:block; font-size:11.5px; color:var(--ink-soft); margin-top:1px; }
 
 .controls{
   max-width:1080px; margin:0 auto;
@@ -319,9 +323,10 @@ footer{
 .lightbox-counter{ color:#fff; font-size:13px; font-weight:600; min-width:40px; text-align:center; }
 
 @media (max-width:520px){
-  .brand{ flex-basis:58%; max-width:220px; }
-  .brand-logo{ max-height:42px; }
-  .headband-hero{ display:none; }
+  .trust-item{ min-width:100%; }
+  .brand-icon{ height:36px; }
+  .brand-name{ font-size:13px; }
+  .brand-tagline, .brand-location{ font-size:8px; }
   .headband h1{ font-size:23px; }
   .grid{ grid-template-columns:repeat(auto-fill, minmax(150px,1fr)); gap:12px; }
   .card-price{ font-size:19px; }
@@ -332,7 +337,22 @@ footer{
 
 <div class="topbar">
   <div class="brand">
-    <img src="logo-bj.png" alt="BJ Importaciones" class="brand-logo">
+    <svg class="brand-icon" viewBox="0 0 145 90" xmlns="http://www.w3.org/2000/svg">
+      <path d="M6,78 Q40,55 82,40" stroke="#ffffff" stroke-width="3" stroke-dasharray="1,7" stroke-linecap="round" fill="none"/>
+      <circle cx="6" cy="78" r="5" fill="#ffffff"/>
+      <g transform="translate(70,0) scale(3.3)">
+        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#F5B700"/>
+        <rect x="7" y="7" width="10" height="4.3" rx="0.6" fill="#1B1B18"/>
+        <rect x="15.2" y="6.3" width="3.4" height="3" rx="0.4" fill="#1B1B18"/>
+        <circle cx="9.3" cy="12" r="1.1" fill="#1B1B18"/>
+        <circle cx="15.5" cy="12" r="1.1" fill="#1B1B18"/>
+      </g>
+    </svg>
+    <div class="brand-text">
+      <div class="brand-name">BJ IMPORTACIONES</div>
+      <div class="brand-tagline">VENTAS POR MAYOR Y POR MENOR</div>
+      <div class="brand-location">TUCUMÁN · ARGENTINA</div>
+    </div>
   </div>
   <button class="cart-btn" id="cartBtn">
     Carrito <span class="cart-count" id="cartCount">0</span>
@@ -341,12 +361,33 @@ footer{
 
 <div class="headband">
   <div class="headband-inner">
-    <div class="headband-text">
-      <h1>Herramientas y equipamiento, directo de fábrica a tu obra.</h1>
-      <p>Importamos marcas como TOTAL y las vendemos por mayor y por menor en Tucumán, sin intermediarios. Elegí tus productos acá y coordinamos todo por WhatsApp — con stock real y entrega rápida.</p>
+    <h1>Herramientas y equipamiento, directo de fábrica a tu obra.</h1>
+    <p>Importamos marcas como TOTAL y las vendemos por mayor y por menor en Tucumán, sin intermediarios. Elegí tus productos acá y coordinamos todo por WhatsApp — con stock real y entrega rápida.</p>
+  </div>
+</div>
+
+<div class="trust-strip">
+  <div class="trust-strip-inner">
+    <div class="trust-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+      <div class="trust-item-text">
+        <strong>Todos los medios de pago</strong>
+        <span>Efectivo (con descuento), transferencia, tarjeta y Mercado Pago</span>
+      </div>
     </div>
-    <div class="headband-hero">
-      <img src="AMO_1.jpg" alt="Amoladora angular inalámbrica Total 20V">
+    <div class="trust-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="7" width="13" height="10" rx="1"/><path d="M14 10h4l3 3v4h-7z"/><circle cx="6" cy="19" r="1.6"/><circle cx="17" cy="19" r="1.6"/></svg>
+      <div class="trust-item-text">
+        <strong>Envíos a todo el país</strong>
+        <span>Coordinamos el envío que mejor te convenga</span>
+      </div>
+    </div>
+    <div class="trust-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v12H8l-4 4z"/></svg>
+      <div class="trust-item-text">
+        <strong>Tu consulta no molesta</strong>
+        <span>Escribinos por WhatsApp las veces que necesites</span>
+      </div>
     </div>
   </div>
 </div>
@@ -411,24 +452,23 @@ const ICONS = {
 };
 
 const PRODUCTS = [
-  { id:2, name:"Amoladora Angular Inalámbrica Total 20V (mod. TAGLI261521)", cat:"Inalámbricas", price:160000, spec:"900W · Brushless · disco 115mm · 9000rpm · incluye batería 4.0Ah, cargador y 5 discos", icon:"grinder", images:["AMO_2.jpg","AMO_1.jpg","AMO_3.jpg"] },
-  { id:3, name:"Sierra Sable Inalámbrica Total (mod. TRSLI6506)", cat:"Inalámbricas", price:100000, spec:"0-3200rpm · corte metal 8mm / madera 65mm · traba de gatillo · luz LED · NO incluye batería, cargador ni hojas", icon:"saw", images:["s1.webp"], outOfStock:true },
+  { id:2, name:"Amoladora Angular Inalámbrica Total 20V (mod. TAGLI261521)", cat:"Inalámbricas", price:159999, spec:"900W · Brushless · disco 115mm · 9000rpm · incluye batería 4.0Ah, cargador y 5 discos", icon:"grinder", images:["AMO_2.jpg","AMO_1.jpg","AMO_3.jpg"] },
+  { id:3, name:"Sierra Sable Inalámbrica Total (mod. TRSLI6506)", cat:"Inalámbricas", price:99999, spec:"0-3200rpm · corte metal 8mm / madera 65mm · traba de gatillo · luz LED · NO incluye batería, cargador ni hojas", icon:"saw", images:["s1.webp"], outOfStock:true },
   { id:4, name:"Mini taladro Total", cat:"Inalámbricas", price:25500, spec:"Trabajos de precisión", icon:"drill", draft:true },
-  { id:5, name:"Pistola para pintar Total", cat:"Inalámbricas", price:138000, spec:"600W · tanque 800ml", icon:"spray", draft:true },
-  { id:6, name:"Nivel Láser 360° Total (mod. TLL306502)", cat:"Medición", price:150000, spec:"Alcance 35m · autonivelante · líneas verdes · control remoto · carga USB-C · con estuche", icon:"level", images:["NIVEL_1.jpg","NIVEL_3.jpg","NIVEL_2.jpg"] },
-  { id:7, name:"Calibre Digital Total (mod. TMT321501)", cat:"Medición", price:50000, spec:"0-150mm · resolución 0.01mm · acero inoxidable · botón de cero · apagado automático · incluye estuche", icon:"caliper", images:["c2.webp","c1.webp","c4.webp"] },
+  { id:6, name:"Nivel Láser 360° Total (mod. TLL306502)", cat:"Medición", price:149999, spec:"Alcance 35m · autonivelante · líneas verdes · control remoto · carga USB-C · con estuche", icon:"level", images:["NIVEL_1.jpg","NIVEL_3.jpg","NIVEL_2.jpg"] },
+  { id:7, name:"Calibre Digital Total (mod. TMT321501)", cat:"Medición", price:49999, spec:"0-150mm · resolución 0.01mm · acero inoxidable · botón de cero · apagado automático · incluye estuche", icon:"caliper", images:["c2.webp","c1.webp","c4.webp"] },
   { id:8, name:"Cinta métrica Total 8m 32mm", cat:"Medición", price:25000, spec:"Acero retráctil · botón de tranca · recubierta nylon 360° · métrica y en pulgadas", icon:"tape", images:["ruleta_6.jpg","ruleta_5.jpg","ruleta_3.webp"] },
   { id:9, name:"Set de Destornilladores Total 26 Piezas", cat:"Manuales", price:55000, spec:"Acero Cr-V · puntas plana, Phillips, Pozidriv, Torx y hexagonal · mangos ergonómicos · con organizador", icon:"screwdriver", images:["SET_1.webp","SET_4.jpg","SET_2.webp"] },
   { id:10, name:"Combo Tijeras de Poda Total 3 Piezas (mod. THT1576033)", cat:"Jardín", price:65000, spec:"Incluye tijera 215mm, cizalla 570mm y tijerón 730mm · acero al carbono SK5 · mango antideslizante", icon:"shears", images:["T1.jpg","T2.jpg"] },
-  { id:12, name:"Mini Torno Digital Total 200W (mod. TG2006)", cat:"Otros", price:100000, spec:"200W · velocidad variable · eje flexible · 150 piezas de accesorios · con maletín", icon:"tool", images:["M1.jpg","M2.jpg","M3.jpg"] },
-  { id:13, name:"Foco LED portátil inalámbrico Total P20S", cat:"Iluminación", price:70000, spec:"1800 lúmenes · exterior · batería y cargador por separado", icon:"light", images:["Reflector%20total%201.webp","reflector%20total%202.webp","reflector%20total%203.webp"] },
-  { id:14, name:"Taladro Percutor Atornillador Total 20V Industrial", cat:"Inalámbricas", price:160000, spec:"20V · 55Nm · Brushless · mandril 13mm · incluye maletín, 2 baterías y cargador", icon:"drill", images:["taladro_1.webp","taladro_4.webp","taladro_3.webp"] },
-  { id:15, name:"Kit Combo Accesorios Total (mod. TOS26068)", cat:"Accesorios", price:140000, spec:"4 cajas · mechas, puntas y sierras · estuche organizador · compatible taladro y atornillador", icon:"tool", images:["como_3.webp","combo_2.webp","combo_1.webp"] },
-  { id:16, name:"Pistola de Pintura Inalámbrica Total 20V (mod. TSGLI20042)", cat:"Inalámbricas", price:100000, spec:"20V · flujo 800ml/min · tanque 1000ml · incluye batería, cargador y accesorios", icon:"spray", images:["P1.jpg","P2.jpg"], outOfStock:true },
+  { id:12, name:"Mini Torno Digital Total 200W (mod. TG2006)", cat:"Otros", price:99999, spec:"200W · velocidad variable · eje flexible · 150 piezas de accesorios · con maletín", icon:"tool", images:["M1.jpg","M2.jpg","M3.jpg"] },
+  { id:13, name:"Foco LED portátil inalámbrico Total P20S", cat:"Iluminación", price:69999, spec:"1800 lúmenes · exterior · batería y cargador por separado", icon:"light", images:["Reflector%20total%201.webp","reflector%20total%202.webp","reflector%20total%203.webp"] },
+  { id:14, name:"Taladro Percutor Atornillador Total 20V Industrial", cat:"Inalámbricas", price:159999, spec:"20V · 55Nm · Brushless · mandril 13mm · incluye maletín, 2 baterías y cargador", icon:"drill", images:["taladro_1.webp","taladro_4.webp","taladro_3.webp"] },
+  { id:15, name:"Kit Combo Accesorios Total (mod. TOS26068)", cat:"Accesorios", price:139999, spec:"4 cajas · mechas, puntas y sierras · estuche organizador · compatible taladro y atornillador", icon:"tool", images:["como_3.webp","combo_2.webp","combo_1.webp"] },
+  { id:16, name:"Pistola de Pintura Inalámbrica Total 20V (mod. TSGLI20042)", cat:"Inalámbricas", price:99999, spec:"20V · flujo 800ml/min · tanque 1000ml · incluye batería, cargador y accesorios", icon:"spray", images:["P1.jpg","P2.jpg"], outOfStock:true },
   { id:17, name:"Docena de Guantes", cat:"Accesorios", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool", draft:true },
   { id:18, name:"Combo Medidor Láser + Cinta Métrica Total (mod. TLDD241201)", cat:"Medición", price:65000, spec:"Medidor láser de distancia 70m con pantalla digital + cinta métrica 5m · ideal para medición industrial y construcción", icon:"tape", images:["k2.webp","k1.webp","k4.webp","k3.webp"] },
   { id:19, name:"Cortador de Vidrio", cat:"Manuales", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool", draft:true },
-  { id:20, name:"Aspiradora 2 en 1 Total 20V (mod. TOSLI29832)", cat:"Bazar", price:200000, spec:"Kit aspiradora vertical + de mano, sin cable · 20V · incluye 2 baterías 2.0Ah, cargador, manguera, tubos y boquillas", icon:"vacuum", images:["aspiradora_1.jpg","aspiradora_2.webp"], outOfStock:true },
+  { id:20, name:"Aspiradora 2 en 1 Total 20V (mod. TOSLI29832)", cat:"Bazar", price:199999, spec:"Kit aspiradora vertical + de mano, sin cable · 20V · incluye 2 baterías 2.0Ah, cargador, manguera, tubos y boquillas", icon:"vacuum", images:["aspiradora_1.jpg","aspiradora_2.webp"], outOfStock:true },
   { id:21, name:"Discos para Amoladora", cat:"Accesorios", price:0, spec:"Descripción y foto pendiente de cargar", icon:"grinder", draft:true },
   { id:22, name:"Soporte de Soldador USB", cat:"Accesorios", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool", draft:true },
   { id:23, name:"Termo de la Selección", cat:"Bazar", price:0, spec:"Descripción y foto pendiente de cargar", icon:"tool", draft:true },
